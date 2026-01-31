@@ -76,9 +76,13 @@ type Category = (typeof categories)[number];
 export const Products = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
 
-  const handleWhatsAppOrder = (productName: string) => {
+  const handleWhatsAppOrder = (productName: string, productImage: string, productPrice: number) => {
+    // Get the full image URL for the product
+    const baseUrl = window.location.origin;
+    const imageUrl = productImage.startsWith('http') ? productImage : `${baseUrl}${productImage}`;
+    
     const message = encodeURIComponent(
-      `Hi! I'm interested in ordering: ${productName}. Can you please provide more details?`
+      `Hi! 👋\n\nI want to order this:\n\n🎂 *${productName}*\n💰 Listed Price: $${productPrice}\n\nIs this available and what is the final price?\n\n📸 Product Image: ${imageUrl}`
     );
     window.open(`https://wa.me/1234567890?text=${message}`, "_blank");
   };
@@ -166,7 +170,7 @@ export const Products = () => {
                   
                   {/* WhatsApp Button */}
                   <button
-                    onClick={() => handleWhatsAppOrder(product.name)}
+                    onClick={() => handleWhatsAppOrder(product.name, product.image, product.price)}
                     className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20BD5A] transition-colors duration-200 shadow-md hover:shadow-lg"
                     aria-label={`Order ${product.name} on WhatsApp`}
                   >
