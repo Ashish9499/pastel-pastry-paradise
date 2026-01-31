@@ -94,19 +94,6 @@ export const Products = () => {
   return (
     <section id="products" className="relative bg-background py-20 md:py-28">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16 relative">
-          <Sparkle className="absolute top-0 left-1/4 sparkle hidden md:block" size={18} />
-          <Sparkle className="absolute -top-4 right-1/4 sparkle sparkle-delay-1 hidden md:block" size={22} />
-          
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-coral mb-4">
-            Our Signature
-          </h2>
-          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-            Discover our handcrafted selection of cakes, cookies, and pastries. 
-            Each piece is made fresh daily with love.
-          </p>
-        </div>
 
         {/* WhatsApp Order Notice */}
         <div className="bg-secondary/50 rounded-2xl p-4 md:p-6 mb-10 text-center border border-border/50">
@@ -185,32 +172,6 @@ export const Products = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Pagination (Visual Only) */}
-        <div className="flex items-center justify-center gap-2 mt-12">
-          <button className="w-10 h-10 rounded-full border-2 border-border hover:border-primary transition-colors flex items-center justify-center">
-            ‹
-          </button>
-          {[1, 2, 3].map((page) => (
-            <button
-              key={page}
-              className={`w-10 h-10 rounded-full font-semibold transition-colors ${
-                page === 1 
-                  ? "bg-primary text-primary-foreground" 
-                  : "text-foreground/60 hover:text-primary"
-              }`}
-            >
-              {page}
-            </button>
-          ))}
-          <span className="text-foreground/40 px-2">...</span>
-          <button className="w-10 h-10 rounded-full font-semibold text-foreground/60 hover:text-primary transition-colors">
-            10
-          </button>
-          <button className="w-10 h-10 rounded-full border-2 border-border hover:border-primary transition-colors flex items-center justify-center">
-            ›
-          </button>
         </div>
       </div>
 

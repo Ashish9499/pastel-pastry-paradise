@@ -17,12 +17,6 @@ const footerLinks = {
     label: "Shop Cakes",
     href: "#products"
   }, {
-    label: "Recipes",
-    href: "#journal"
-  }, {
-    label: "Cake Journal",
-    href: "#journal"
-  }, {
     label: "Our Values",
     href: "#about"
   }],

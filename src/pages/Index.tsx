@@ -6,7 +6,6 @@ import GoogleReviews from "@/components/GoogleReviews";
 import HowToOrder from "@/components/HowToOrder";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import GoogleReviews from "@/components/GoogleReviews";
 
 const Index = () => {
   return (
