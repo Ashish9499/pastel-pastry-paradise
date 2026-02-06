@@ -153,6 +153,72 @@
 }
 
 @layer components {
+  /* 3D Perspective Container */
+  .perspective-container {
+    perspective: 1000px;
+    perspective-origin: center;
+  }
+
+  /* 3D Card Tilt Effect */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  .card-3d:hover {
+    transform: rotateY(-5deg) rotateX(5deg) translateZ(20px);
+    box-shadow: 20px 20px 60px hsl(var(--primary) / 0.15), -5px -5px 20px hsl(var(--background) / 0.5);
+  }
+
+  /* Float Animation - Enhanced */
+  @keyframes float-3d {
+    0%, 100% {
+      transform: translateY(0px) rotateX(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotateX(3deg);
+    }
+  }
+
+  .float-3d {
+    animation: float-3d 5s ease-in-out infinite;
+  }
+
+  /* Pulse Glow Animation */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--coral) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--coral) / 0.5), 0 0 60px hsl(var(--coral) / 0.2);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Shimmer Effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--background)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
   /* Wavy Section Divider */
   .wave-divider {
     position: relative;
@@ -168,7 +234,7 @@
     height: 60px;
   }
 
-  /* Sparkle Animation */
+  /* Sparkle Animation - Enhanced */
   @keyframes sparkle {
     0%, 100% {
       opacity: 0.3;
@@ -184,38 +250,59 @@
     animation: sparkle 3s ease-in-out infinite;
   }
 
-  .sparkle-delay-1 {
-    animation-delay: 0.5s;
-  }
-
-  .sparkle-delay-2 {
-    animation-delay: 1s;
-  }
-
-  .sparkle-delay-3 {
-    animation-delay: 1.5s;
-  }
+  .sparkle-delay-1 { animation-delay: 0.5s; }
+  .sparkle-delay-2 { animation-delay: 1s; }
+  .sparkle-delay-3 { animation-delay: 1.5s; }
 
   /* Float Animation */
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
 
   .float {
     animation: float 4s ease-in-out infinite;
   }
 
-  .float-delay-1 {
-    animation-delay: 0.5s;
+  .float-delay-1 { animation-delay: 0.5s; }
+  .float-delay-2 { animation-delay: 1s; }
+
+  /* Slide Up Animation */
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .float-delay-2 {
-    animation-delay: 1s;
+  .slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+  }
+
+  /* Bounce In Animation */
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .bounce-in {
+    animation: bounce-in 0.6s ease-out forwards;
   }
 
   /* Testimonial Card Styles */
@@ -237,14 +324,16 @@
     @apply bg-background border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
   }
 
-  /* Product Card */
+  /* Product Card - Enhanced 3D */
   .product-card {
-    @apply bg-card rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2;
+    @apply bg-card rounded-3xl overflow-hidden transition-all duration-500;
     box-shadow: var(--shadow-soft);
+    transform-style: preserve-3d;
   }
 
   .product-card:hover {
     box-shadow: var(--shadow-elevated);
+    transform: translateY(-8px) scale(1.02);
   }
 
   /* Step Number Badge */
@@ -263,15 +352,15 @@
     box-shadow: var(--shadow-card);
   }
 
-  /* WhatsApp Button */
+  /* WhatsApp Button - Enhanced */
   .whatsapp-btn {
-    @apply inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-[#20BD5A] hover:scale-105;
+    @apply inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-[#20BD5A] hover:scale-105 active:scale-95;
     box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
   }
 
-  /* Primary Button with Glow */
+  /* Primary Button with Glow - Enhanced */
   .btn-primary-glow {
-    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105;
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 active:scale-95;
     box-shadow: 0 4px 20px hsl(var(--primary) / 0.4);
   }
 
@@ -289,10 +378,67 @@
   .section-mint {
     @apply bg-mint;
   }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl border border-border/30;
+  }
+
+  /* Mobile Touch Friendly */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--coral)) 100%);
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* 3D Transform Utilities */
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Safe Area for Mobile */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Scroll Snap for Mobile */
+  .snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .snap-center {
+    scroll-snap-align: center;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

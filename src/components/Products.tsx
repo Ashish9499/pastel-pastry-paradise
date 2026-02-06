@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { MessageCircle, ExternalLink } from "lucide-react";
 import { WaveDivider } from "./WaveDivider";
-import { Sparkle } from "./Sparkle";
 
 // Import product images
 import chocolateCake from "@/assets/product-chocolate-cake.jpg";
@@ -77,7 +76,6 @@ export const Products = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
 
   const handleWhatsAppOrder = (productName: string, productImage: string, productPrice: number) => {
-    // Get the full image URL for the product
     const baseUrl = window.location.origin;
     const imageUrl = productImage.startsWith('http') ? productImage : `${baseUrl}${productImage}`;
     
@@ -92,13 +90,13 @@ export const Products = () => {
     : products.filter(product => product.category === activeCategory);
 
   return (
-    <section id="products" className="relative bg-background py-20 md:py-28">
+    <section id="products" className="relative bg-background py-16 md:py-28">
       <div className="container mx-auto px-4">
 
-        {/* WhatsApp Order Notice */}
-        <div className="bg-secondary/50 rounded-2xl p-4 md:p-6 mb-10 text-center border border-border/50">
+        {/* WhatsApp Order Notice - Mobile optimized */}
+        <div className="glass rounded-2xl p-4 md:p-6 mb-8 text-center border border-coral/20">
           <div className="flex items-center justify-center gap-2 text-primary font-semibold mb-2">
-            <MessageCircle size={20} />
+            <MessageCircle size={20} className="animate-wiggle" />
             <span>Easy WhatsApp Ordering!</span>
           </div>
           <p className="text-foreground/70 text-sm md:text-base">
@@ -106,16 +104,16 @@ export const Products = () => {
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        {/* Category Tabs - Horizontal scroll on mobile */}
+        <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide pb-2 snap-x-mandatory -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:justify-center md:gap-3">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-3 rounded-full font-semibold text-sm md:text-base transition-all duration-300 ${
+              className={`flex-shrink-0 px-5 py-2.5 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-base transition-all duration-300 touch-target snap-center ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg scale-105"
-                  : "bg-secondary/70 text-foreground/70 hover:bg-secondary hover:text-foreground"
+                  : "bg-secondary/70 text-foreground/70 hover:bg-secondary hover:text-foreground active:scale-95"
               }`}
             >
               {category}
@@ -123,8 +121,8 @@ export const Products = () => {
           ))}
         </div>
 
-        {/* Products Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Products Grid - 2 columns on mobile */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8 perspective-container">
           {filteredProducts.map((product, index) => (
             <div 
               key={product.id} 
@@ -138,19 +136,19 @@ export const Products = () => {
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
-                <span className="absolute top-4 left-4 bg-primary/90 text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="absolute top-2 left-2 md:top-4 md:left-4 bg-primary/90 text-primary-foreground text-[10px] md:text-xs font-semibold px-2 py-0.5 md:px-3 md:py-1 rounded-full">
                   {product.category}
                 </span>
               </div>
 
-              {/* Product Info */}
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-bold text-foreground text-lg mb-1 line-clamp-2">
+              {/* Product Info - Compact on mobile */}
+              <div className="p-3 md:p-5">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-3">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-foreground text-sm md:text-lg mb-1 line-clamp-2">
                       {product.name}
                     </h3>
-                    <p className="text-coral font-bold text-xl">
+                    <p className="text-coral font-bold text-lg md:text-xl">
                       ${product.price}
                     </p>
                   </div>
@@ -158,16 +156,16 @@ export const Products = () => {
                   {/* WhatsApp Button */}
                   <button
                     onClick={() => handleWhatsAppOrder(product.name, product.image, product.price)}
-                    className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20BD5A] transition-colors duration-200 shadow-md hover:shadow-lg"
+                    className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20BD5A] active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg touch-target self-end md:self-auto"
                     aria-label={`Order ${product.name} on WhatsApp`}
                   >
-                    <MessageCircle size={20} />
+                    <MessageCircle size={18} className="md:w-5 md:h-5" />
                   </button>
                 </div>
 
-                <button className="mt-4 flex items-center gap-1 text-primary font-semibold text-sm hover:gap-2 transition-all duration-200">
+                <button className="mt-3 md:mt-4 flex items-center gap-1 text-primary font-semibold text-xs md:text-sm hover:gap-2 transition-all duration-200">
                   More Details
-                  <ExternalLink size={14} />
+                  <ExternalLink size={12} className="md:w-3.5 md:h-3.5" />
                 </button>
               </div>
             </div>
