@@ -10,13 +10,7 @@ const footerLinks = {
   products: [
     { label: "Shop Cakes", href: "#products" },
     { label: "Our Values", href: "#about" },
-  ],
-  support: [
-    { label: "FAQ", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Refund Policy", href: "#" },
-    { label: "Privacy Policy", href: "#" },
-  ],
+  ]
 };
 
 const socialLinks = [
@@ -41,9 +35,9 @@ export const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-2 text-primary-foreground/80 text-sm md:text-base">
               <p className="font-semibold text-primary-foreground">
-                (+123) 456 7890
+                +919728855586
               </p>
-              <p>bakejoy.cakeshop@mail.com</p>
+              <p>kanhabakery@gmail.com</p>
             </div>
 
             {/* Social Links */}
@@ -84,22 +78,6 @@ export const Footer = () => {
             <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4">Products</h4>
             <ul className="space-y-2 md:space-y-3">
               {footerLinks.products.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-200 text-sm md:text-base"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-2 lg:col-span-1">
-            <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4">Support</h4>
-            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-2 md:gap-3">
-              {footerLinks.support.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}

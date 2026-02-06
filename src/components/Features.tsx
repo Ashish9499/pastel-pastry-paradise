@@ -25,15 +25,15 @@ const cakeImages = [
 
 export const Features = () => {
   return (
-    <section id="about" className="relative section-peach py-16 md:py-28">
+    <section id="about" className="relative section-peach py-12 md:py-20 lg:py-28">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Text Content */}
-          <div className="relative order-2 lg:order-1">
-            <Sparkle className="absolute -top-8 -left-4 sparkle hidden md:block" size={20} />
-            <Sparkle className="absolute top-16 right-0 sparkle sparkle-delay-1 hidden md:block" size={16} />
+          <div className="relative order-2 lg:order-1 px-2">
+            <Sparkle className="absolute -top-6 -left-2 sparkle hidden md:block" size={18} />
+            <Sparkle className="absolute top-12 right-0 sparkle sparkle-delay-1 hidden md:block" size={14} />
             
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-primary mb-6 text-center lg:text-left">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary mb-4 md:mb-6 text-center lg:text-left">
               Best Choice for{" "}
               <span className="text-coral relative inline-block">
                 Every Occasion
@@ -43,21 +43,21 @@ export const Features = () => {
               </span>
             </h2>
             
-            <p className="text-foreground/70 text-base md:text-lg leading-relaxed mb-8 text-center lg:text-left">
-              At BakeJoy, we turn simple ingredients into delectable works of 
+            <p className="text-foreground/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6 md:mb-8 text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+              At Kanha Bakery, we turn simple ingredients into delectable works of 
               edible art. Satisfy your cravings with our irresistible pastries and 
-              baked goods, delivered fresh from the oven for you truly.
+              baked goods, delivered fresh from oven for you truly.
             </p>
 
-            {/* Feature Badges - Horizontal scroll on mobile */}
+            {/* Feature Badges - Mobile optimized */}
             <div className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start">
-              <button className="w-10 h-10 rounded-full bg-background border-2 border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 touch-target active:scale-95">
-                +
+              <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-background border-2 border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 touch-target active:scale-95">
+                <span className="text-sm md:text-base">+</span>
               </button>
               {features.map((feature) => (
                 <span
                   key={feature.label}
-                  className={`feature-badge text-xs md:text-sm ${
+                  className={`feature-badge text-xs md:text-sm px-3 py-1.5 md:px-4 md:py-2 ${
                     feature.variant === "primary" 
                       ? "feature-badge-primary" 
                       : "feature-badge-outline"
@@ -92,13 +92,13 @@ export const Features = () => {
               </div>
             </div>
 
-            {/* Mobile Horizontal Scroll */}
+            {/* Mobile Horizontal Scroll - Enhanced */}
             <div className="lg:hidden -mx-4 px-4">
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-4 snap-x-mandatory">
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-3 snap-x-mandatory">
                 {cakeImages.map((cake, i) => (
                   <div 
                     key={i} 
-                    className="flex-shrink-0 w-48 h-48 rounded-2xl overflow-hidden shadow-lg snap-center"
+                    className="flex-shrink-0 w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden shadow-lg snap-center touch-target active:scale-95 transition-transform"
                   >
                     <img 
                       src={cake.src} 
@@ -108,12 +108,12 @@ export const Features = () => {
                   </div>
                 ))}
               </div>
-              {/* Swipe indicator */}
-              <div className="flex items-center justify-center gap-2 mt-2">
-                <div className="w-8 h-1 rounded-full bg-coral/50" />
-                <div className="w-2 h-1 rounded-full bg-coral/30" />
-                <div className="w-2 h-1 rounded-full bg-coral/30" />
-                <div className="w-2 h-1 rounded-full bg-coral/30" />
+              {/* Enhanced Swipe indicator */}
+              <div className="flex items-center justify-center gap-1.5 mt-3">
+                <div className="w-6 h-1.5 rounded-full bg-coral" />
+                <div className="w-1.5 h-1.5 rounded-full bg-coral/40" />
+                <div className="w-1.5 h-1.5 rounded-full bg-coral/40" />
+                <div className="w-1.5 h-1.5 rounded-full bg-coral/40" />
               </div>
             </div>
           </div>
