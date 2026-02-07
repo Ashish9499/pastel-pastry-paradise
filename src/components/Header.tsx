@@ -80,7 +80,7 @@ export const Header = () => {
 
         {/* Mobile Navigation - Full screen overlay */}
         <div 
-          className={`md:hidden fixed inset-0 top-14 bg-background/98 backdrop-blur-xl transition-all duration-300 ${
+          className={`md:hidden fixed inset-0 top-[56px] bg-background/98 backdrop-blur-xl transition-all duration-300 ${
             isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
