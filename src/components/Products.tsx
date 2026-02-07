@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { MessageCircle, ExternalLink } from "lucide-react";
+import { MessageCircle, ExternalLink, Loader2 } from "lucide-react";
 import { WaveDivider } from "./WaveDivider";
+import { useProducts, Product } from "@/hooks/useProducts";
 
-// Import product images
+// Import fallback product images
 import chocolateCake from "@/assets/product-chocolate-cake.jpg";
 import vanillaCake from "@/assets/product-vanilla-cake.jpg";
 import cookies from "@/assets/product-cookies.jpg";
@@ -10,70 +11,33 @@ import puffs from "@/assets/product-puffs.jpg";
 import weddingCake from "@/assets/product-wedding-cake.jpg";
 import birthdayCake from "@/assets/product-birthday-cake.jpg";
 
-const products = [
-  {
-    id: 1,
-    name: "Descendant Choco Chips",
-    price: 15,
-    image: cookies,
-    category: "Cookies",
-  },
-  {
-    id: 2,
-    name: "Classic Vanilla Chiffon Cake",
-    price: 25,
-    image: vanillaCake,
-    category: "Cakes",
-  },
-  {
-    id: 3,
-    name: "Choco Mousse Extravaganza",
-    price: 35,
-    image: chocolateCake,
-    category: "Cakes",
-  },
-  {
-    id: 4,
-    name: "Cream Puff Delight",
-    price: 12,
-    image: puffs,
-    category: "Puffs",
-  },
-  {
-    id: 5,
-    name: "Elegant Wedding Cake",
-    price: 150,
-    image: weddingCake,
-    category: "Cakes",
-  },
-  {
-    id: 6,
-    name: "Rainbow Birthday Cake",
-    price: 45,
-    image: birthdayCake,
-    category: "Cakes",
-  },
-  {
-    id: 7,
-    name: "Butter Cookies Box",
-    price: 18,
-    image: cookies,
-    category: "Cookies",
-  },
-  {
-    id: 8,
-    name: "Cheese Puffs",
-    price: 10,
-    image: puffs,
-    category: "Puffs",
-  },
-];
+// Fallback images based on category
+const fallbackImages: Record<string, string> = {
+  Cakes: chocolateCake,
+  Cookies: cookies,
+  Puffs: puffs,
+};
+
+// Additional fallback images for variety
+const cakeFallbacks = [chocolateCake, vanillaCake, weddingCake, birthdayCake];
 
 const categories = ["All", "Cakes", "Cookies", "Puffs"] as const;
 type Category = (typeof categories)[number];
 
 export const Products = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const { products, isLoading, error } = useProducts();
+
+  const getProductImage = (product: Product, index: number): string => {
+    // Use uploaded image if available
+    if (product.image_url) return product.image_url;
+    
+    // Use category-based fallback with variety for cakes
+    if (product.category === "Cakes") {
+      return cakeFallbacks[index % cakeFallbacks.length];
+    }
+    return fallbackImages[product.category] || chocolateCake;
+  };
 
   const handleWhatsAppOrder = (productName: string, productImage: string, productPrice: number) => {
     const baseUrl = window.location.origin;
@@ -121,56 +85,81 @@ export const Products = () => {
           ))}
         </div>
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex items-center justify-center py-16">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-16">
+            <p className="text-foreground/60">Failed to load products. Please try again later.</p>
+          </div>
+        )}
+
         {/* Products Grid - 2 columns on mobile */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8 perspective-container">
-          {filteredProducts.map((product, index) => (
-            <div 
-              key={product.id} 
-              className="product-card animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Product Image */}
-              <div className="relative aspect-square overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-                <span className="absolute top-2 left-2 md:top-4 md:left-4 bg-primary/90 text-primary-foreground text-[10px] md:text-xs font-semibold px-2 py-0.5 md:px-3 md:py-1 rounded-full">
-                  {product.category}
-                </span>
-              </div>
-
-              {/* Product Info - Compact on mobile */}
-              <div className="p-3 md:p-5">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-3">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-foreground text-sm md:text-lg mb-1 line-clamp-2">
-                      {product.name}
-                    </h3>
-                    <p className="text-coral font-bold text-lg md:text-xl">
-                      ${product.price}
-                    </p>
+        {!isLoading && !error && (
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8 perspective-container">
+            {filteredProducts.map((product, index) => {
+              const productImage = getProductImage(product, index);
+              return (
+                <div 
+                  key={product.id} 
+                  className="product-card animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {/* Product Image */}
+                  <div className="relative aspect-square overflow-hidden">
+                    <img
+                      src={productImage}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                    <span className="absolute top-2 left-2 md:top-4 md:left-4 bg-primary/90 text-primary-foreground text-[10px] md:text-xs font-semibold px-2 py-0.5 md:px-3 md:py-1 rounded-full">
+                      {product.category}
+                    </span>
                   </div>
-                  
-                  {/* WhatsApp Button */}
-                  <button
-                    onClick={() => handleWhatsAppOrder(product.name, product.image, product.price)}
-                    className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20BD5A] active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg touch-target self-end md:self-auto"
-                    aria-label={`Order ${product.name} on WhatsApp`}
-                  >
-                    <MessageCircle size={18} className="md:w-5 md:h-5" />
-                  </button>
-                </div>
 
-                <button className="mt-3 md:mt-4 flex items-center gap-1 text-primary font-semibold text-xs md:text-sm hover:gap-2 transition-all duration-200">
-                  More Details
-                  <ExternalLink size={12} className="md:w-3.5 md:h-3.5" />
-                </button>
+                  {/* Product Info - Compact on mobile */}
+                  <div className="p-3 md:p-5">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-3">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-foreground text-sm md:text-lg mb-1 line-clamp-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-coral font-bold text-lg md:text-xl">
+                          ${product.price}
+                        </p>
+                      </div>
+                      
+                      {/* WhatsApp Button */}
+                      <button
+                        onClick={() => handleWhatsAppOrder(product.name, productImage, product.price)}
+                        className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20BD5A] active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg touch-target self-end md:self-auto"
+                        aria-label={`Order ${product.name} on WhatsApp`}
+                      >
+                        <MessageCircle size={18} className="md:w-5 md:h-5" />
+                      </button>
+                    </div>
+
+                    <button className="mt-3 md:mt-4 flex items-center gap-1 text-primary font-semibold text-xs md:text-sm hover:gap-2 transition-all duration-200">
+                      More Details
+                      <ExternalLink size={12} className="md:w-3.5 md:h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+
+            {filteredProducts.length === 0 && !isLoading && (
+              <div className="col-span-full text-center py-16">
+                <p className="text-foreground/60">No products found in this category.</p>
               </div>
-            </div>
-          ))}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Wave Divider */}

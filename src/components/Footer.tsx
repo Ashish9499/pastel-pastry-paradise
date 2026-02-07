@@ -1,4 +1,5 @@
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Instagram, Facebook, Twitter, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = {
   company: [
@@ -97,16 +98,20 @@ export const Footer = () => {
             <p className="text-primary-foreground/60 text-xs md:text-sm text-center md:text-left">
               © 2024 BakeJoy. All rights reserved. Made with 🧁 and love.
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-6 items-center">
               <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-xs md:text-sm transition-colors">
                 Privacy
               </a>
               <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-xs md:text-sm transition-colors">
                 Terms
               </a>
-              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-xs md:text-sm transition-colors">
-                Cookies
-              </a>
+              <Link 
+                to="/admin-login" 
+                className="text-primary-foreground/40 hover:text-primary-foreground/60 text-xs transition-colors flex items-center gap-1"
+              >
+                <Lock size={10} />
+                Admin
+              </Link>
             </div>
           </div>
         </div>
