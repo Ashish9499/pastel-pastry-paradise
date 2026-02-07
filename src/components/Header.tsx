@@ -24,15 +24,18 @@ export const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-top ${
         isScrolled 
-          ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-sm" 
-          : "bg-transparent"
+          ? "bg-gradient-to-r from-primary via-primary/95 to-coral/95 backdrop-blur-xl border-b border-border/50 shadow-lg" 
+          : "bg-gradient-to-r from-primary/90 to-coral/90 backdrop-blur-md"
       }`}
     >
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between h-14 md:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="font-display text-xl md:text-3xl text-primary">
+          {/* Logo - Enhanced */}
+          <a href="#" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-white to-coral rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-110">
+              <span className="font-bold text-lg text-primary">KB</span>
+            </div>
+            <span className="font-display text-2xl md:text-4xl font-bold text-white drop-shadow-lg transition-all duration-300 group-hover:text-yellow-300">
               Kanha Bakery
             </span>
           </a>

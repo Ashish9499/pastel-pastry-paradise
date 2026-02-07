@@ -33,7 +33,7 @@ export const Features = () => {
             <Sparkle className="absolute -top-6 -left-2 sparkle hidden md:block" size={18} />
             <Sparkle className="absolute top-12 right-0 sparkle sparkle-delay-1 hidden md:block" size={14} />
             
-            <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-5xl text-primary mb-3 sm:mb-4 md:mb-6 text-center lg:text-left">
+            <h2 className="font-display text-lg sm:text-xl md:text-2xl lg:text-4xl text-primary mb-4 sm:mb-6 text-center lg:text-left">
               Best Choice for{" "}
               <span className="text-coral relative inline-block">
                 Every Occasion
@@ -43,7 +43,7 @@ export const Features = () => {
               </span>
             </h2>
             
-            <p className="text-foreground/70 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6 md:mb-8 text-center lg:text-left max-w-md sm:max-w-lg mx-auto lg:mx-0">
+            <p className="text-foreground/80 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 text-center lg:text-left max-w-md sm:max-w-lg mx-auto lg:mx-0">
               At Kanha Bakery, we turn simple ingredients into delectable works of 
               edible art. Satisfy your cravings with our irresistible pastries and 
               baked goods, delivered fresh from oven for you truly.
@@ -92,13 +92,13 @@ export const Features = () => {
               </div>
             </div>
 
-            {/* Mobile Horizontal Scroll - Fixed overflow */}
+            {/* Mobile Grid Layout */}
             <div className="lg:hidden -mx-2 sm:-mx-4 px-2 sm:px-4">
-              <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x-mandatory">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 {cakeImages.map((cake, i) => (
                   <div 
                     key={i} 
-                    className="flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden shadow-lg snap-center touch-target active:scale-95 transition-transform"
+                    className="aspect-square rounded-2xl overflow-hidden shadow-lg card-3d"
                   >
                     <img 
                       src={cake.src} 
@@ -108,8 +108,8 @@ export const Features = () => {
                   </div>
                 ))}
               </div>
-              {/* Enhanced Swipe indicator */}
-              <div className="flex items-center justify-center gap-1 mt-2">
+              {/* Swipe indicator */}
+              <div className="flex items-center justify-center gap-1 mt-3">
                 <div className="w-4 h-1 rounded-full bg-coral" />
                 <div className="w-1 h-1 rounded-full bg-coral/40" />
                 <div className="w-1 h-1 rounded-full bg-coral/40" />
